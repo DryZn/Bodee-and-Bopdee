@@ -27,6 +27,7 @@ if(WIN32)
     add_custom_command(
         TARGET Bodee_and_Bopdee POST_BUILD
         COMMAND "${CMAKE_COMMAND}" -E copy_if_different "$<TARGET_FILE:SDL2::SDL2>" "$<TARGET_FILE_DIR:Bodee_and_Bopdee>"
+        COMMAND "${CMAKE_COMMAND}" -E copy_if_different "$<TARGET_FILE:SDL2_image::SDL2_image>" "$<TARGET_FILE_DIR:Bodee_and_Bopdee>"
         VERBATIM
     )
 endif()
