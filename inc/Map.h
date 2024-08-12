@@ -1,13 +1,12 @@
 #pragma once
-#include <SDL_image.h>
+#include <Bodee.h>
+#include <Displayable.h>
 
-class Map {
+class Map : public Displayable {
 private:
-  SDL_Texture *bg;
-  SDL_Renderer *rend;
+  Bodee _bodee;
 
 public:
-  Map(SDL_Renderer *renderer);
-  void update();
-  void destroy();
+  Map(Config *config, Bodee bodee) : Displayable(config, "bg"), _bodee(bodee){};
+  void update(double deltaTime, const Uint8 *keyboard) override;
 };
