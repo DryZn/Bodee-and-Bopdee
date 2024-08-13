@@ -16,7 +16,12 @@ void GameLoop::launch() {
       SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
   config->setRenderer(renderer);
   Bodee bodee = Bodee(config);
-  Map map = Map(config, bodee);
+  std::cout << SDL_GetError();
+  std::list<GameObject> obstacle = {
+      GameObject(config, "obstacle", 8, 14, 2, 2, 0, 0, 0, 0)};
+  Map map = Map(config, bodee, obstacle);
+
+  std::cout << SDL_GetError();
 
   double deltaTime;
   Uint64 last_frame = 0;
@@ -31,6 +36,8 @@ void GameLoop::launch() {
     current_frame = SDL_GetPerformanceCounter();
     deltaTime = (double)(current_frame - last_frame) /
                 (double)SDL_GetPerformanceFrequency();
+    // std::cout << deltaTime << "\n";
+    // std::cout << 1 / deltaTime << "\n";
     map.update(deltaTime, SDL_GetKeyboardState(NULL));
     SDL_RenderPresent(renderer);
     last_frame = current_frame;

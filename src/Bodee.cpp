@@ -1,19 +1,27 @@
 #include <Bodee.h>
 #include <string.h>
 
-Bodee::Bodee(Config *config) : Displayable(config) {
-  dest.w = config->width / 18;
-  dest.h = config->height / 10.3;
-  dest.x = 0;
-  dest.y = 0;
+Bodee::Bodee(Config *config) : GameObject(config, 15, 9, 2, 5, 0, 0, 0, 0) {
   for (int i = 1; i <= 2; i++)
     waiting[i - 1] =
-        Displayable::loadTexture("bodee/waiting/" + std::to_string(i));
+        Displayable::loadTexture("bodee/wait/" + std::to_string(i));
+  int i = 0;
+  for (int i_name = 1; i_name <= 9; i_name++) {
+    running[i] =
+        Displayable::loadTexture("bodee/run/" + std::to_string(i_name));
+    // duplicate some images
+    if (i_name == 3 | i_name == 8) {
+      running[i + 1] = running[i + 2] = running[i];
+      i += 3;
+    } else
+      i++;
+  }
   texture = waiting[0];
   std::cout << SDL_GetError();
 }
 
 void Bodee::update(double deltaTime, const Uint8 *keyboard) {
+  anim_start += (int)(deltaTime * 100);
   if (keyboard[SDL_SCANCODE_W] | keyboard[SDL_SCANCODE_S] |
       keyboard[SDL_SCANCODE_A] | keyboard[SDL_SCANCODE_D]) {
     dest.y += speed * deltaTime *
@@ -26,8 +34,8 @@ void Bodee::update(double deltaTime, const Uint8 *keyboard) {
       dest.x += speed * deltaTime;
       side = SDL_FLIP_HORIZONTAL;
     }
+    texture = running[(anim_start / 4) % 13];
   } else {
-    anim_start += (int)(deltaTime * 100);
     texture = waiting[(anim_start / 40) % 2];
   }
   SDL_RenderCopyEx(renderer, texture, NULL, &dest, 0, NULL, side);

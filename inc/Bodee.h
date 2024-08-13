@@ -1,14 +1,16 @@
 #pragma once
-#include <Displayable.h>
+#include <GameObject.h>
 
-class Bodee : public Displayable {
+class Bodee : public GameObject {
 private:
   SDL_RendererFlip side = SDL_FLIP_NONE;
-  int speed = 300;
+  int speed = 320;
   int anim_start = 0;
   SDL_Texture *waiting[2];
+  int sizeWait;
+  SDL_Texture *running[13];
+  int sizeRun;
   int waitingTimeFrame;
-  SDL_Rect dest;
 
 public:
   Bodee(Config *config);

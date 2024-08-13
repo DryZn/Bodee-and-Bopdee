@@ -11,7 +11,8 @@ protected:
 public:
   Displayable(Config *config) : renderer(config->renderer){};
   Displayable(Config *config, const char *img_path);
-  void update();
+  virtual void update();
   virtual void update(double deltaTime, const Uint8 *keyboard){};
+  // use ~Displayable instead
   virtual void destroy();
 };
