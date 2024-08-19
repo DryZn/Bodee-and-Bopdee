@@ -31,3 +31,5 @@ if(WIN32)
         VERBATIM
     )
 endif()
+
+file(COPY assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
