@@ -6,5 +6,5 @@ void Map::update(double deltaTime, const Uint8 *keyboard) {
   std::list<GameObject>::iterator it;
   for (it = _obstacles.begin(); it != _obstacles.end(); it++)
     it->update();
-  _bodee.update(deltaTime, keyboard);
+  _bodee.update(deltaTime, keyboard, _obstacles);
 }

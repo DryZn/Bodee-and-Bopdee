@@ -16,9 +16,12 @@ void GameLoop::launch() {
       SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
   config->setRenderer(renderer);
   Bodee bodee = Bodee(config);
+  bodee.init();
   std::cout << SDL_GetError();
   std::list<GameObject> obstacle = {
-      GameObject(config, "obstacle", 8, 14, 2, 2, 0, 0, 0, 0)};
+      GameObject(config, "obstacle", 8, 14, 2, 2),
+      GameObject(config, "obstacle", 8, 14, 4, 2),
+      GameObject(config, "obstacle", 8, 14, 7, 4)};
   Map map = Map(config, bodee, obstacle);
 
   std::cout << SDL_GetError();

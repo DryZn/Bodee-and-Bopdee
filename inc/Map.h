@@ -1,7 +1,5 @@
 #pragma once
 #include <Bodee.h>
-#include <Displayable.h>
-#include <list>
 
 class Map : public Displayable {
 private:
